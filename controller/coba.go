@@ -47,7 +47,7 @@ func GetMenuID(c *fiber.Ctx) error {
 			"message": "Invalid id parameter",
 		})
 	}
-	ps, err := cek.GetMenuItemByID(objID, config.Ulbimongoconn, "KaloriKu")
+	ps, err := cek.GetMenuItemByID(objID, config.Ulbimongoconn, "Proyek3")
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return c.Status(http.StatusNotFound).JSON(fiber.Map{

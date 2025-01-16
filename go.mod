@@ -3,17 +3,18 @@ module github.com/Nidasakinaa/ws-kaloriku
 go 1.23.3
 
 require (
+	github.com/Nidasakinaa/be_KaloriKu v0.0.2
 	github.com/aiteung/atdb v0.1.7
 	github.com/aiteung/musik v0.0.5
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/whatsauth/whatsauth v0.2.9
 	go.mau.fi/whatsmeow v0.0.0-20250104105216-918c879fcd19
+	go.mongodb.org/mongo-driver v1.17.2
 )
 
 require (
 	aidanwoods.dev/go-paseto v1.3.0 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
-	github.com/Nidasakinaa/be_KaloriKu v0.0.1
 	github.com/aiteung/atapi v0.0.16 // indirect
 	github.com/aiteung/atmessage v0.0.27 // indirect
 	github.com/aiteung/atmodel v0.0.4 // indirect
@@ -47,7 +48,6 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	go.mau.fi/libsignal v0.1.1 // indirect
 	go.mau.fi/util v0.8.3 // indirect
-	go.mongodb.org/mongo-driver v1.17.1
 	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
