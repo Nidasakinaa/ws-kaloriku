@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net/http"
@@ -99,9 +100,11 @@ func InsertDataMenu(c *fiber.Ctx) error {
 	}
 	insertedID, err := cek.InsertMenuItem(db, "Menu",
 		menuItem.Name,
+		menuItem.Ingredients,
 		menuItem.Description,
+		menuItem.Calories,
 		menuItem.Category,
-		menuItem.Image) // Assuming menuItem has a Calories field of type float64
+		menuItem.Image) 
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
@@ -112,5 +115,100 @@ func InsertDataMenu(c *fiber.Ctx) error {
 		"status":      http.StatusOK,
 		"message":     "Data berhasil disimpan.",
 		"inserted_id": insertedID,
+	})
+}
+
+// UpdateDataMenu godoc
+// @Summary Update data menuItem.
+// @Description Ubah data menuItem.
+// @Tags MenuItem
+// @Accept json
+// @Produce json
+// @Param id path string true "Masukan ID"
+// @Param request body ReqMenuItem true "Payload Body [RAW]"
+// @Success 200 {object} MenuItem
+// @Failure 400
+// @Failure 500
+// @Router /update/{id} [put]
+func UpdateDataMenuItem(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	id := c.Params("id")
+
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	var menuItem inimodel.MenuItem
+	if err := c.BodyParser(&menuItem); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	err = cek.UpdateMenuItem(context.Background(), db, "Menu",
+		objectID,
+		menuItem.Name,
+		menuItem.Ingredients,
+		menuItem.Description,
+		menuItem.Calories,
+		menuItem.Category,
+		menuItem.Image)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":  http.StatusOK,
+		"message": "Data successfully updated",
+	})
+}
+
+// DeleteMenuItemByID godoc
+// @Summary Delete data menuItem.
+// @Description Hapus data menuItem.
+// @Tags MenuItem
+// @Accept json
+// @Produce json
+// @Param id path string true "Masukan ID"
+// @Success 200
+// @Failure 400
+// @Failure 500
+// @Router /delete/{id} [delete]
+func DeleteMenuItemByID(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if id == "" {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": "Wrong parameter",
+		})
+	}
+
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  http.StatusBadRequest,
+			"message": "Invalid id parameter",
+		})
+	}
+
+	err = cek.DeleteMenuItemByID(objID, config.Ulbimongoconn, "Menu")
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": fmt.Sprintf("Error deleting data for id %s", id),
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":  http.StatusOK,
+		"message": fmt.Sprintf("Data with id %s deleted successfully", id),
 	})
 }

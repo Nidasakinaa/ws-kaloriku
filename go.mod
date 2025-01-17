@@ -3,7 +3,7 @@ module github.com/Nidasakinaa/ws-kaloriku
 go 1.23.3
 
 require (
-	github.com/Nidasakinaa/be_KaloriKu v0.0.2
+	github.com/Nidasakinaa/be_KaloriKu v0.0.5
 	github.com/aiteung/atdb v0.1.7
 	github.com/aiteung/musik v0.0.5
 	github.com/gofiber/fiber/v2 v2.52.6
@@ -15,7 +15,6 @@ require (
 require (
 	aidanwoods.dev/go-paseto v1.3.0 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
-	github.com/aiteung/atmessage v0.0.1 // indirect
 	github.com/aiteung/atmodel v0.0.4 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/fasthttp/websocket v1.5.3 // indirect

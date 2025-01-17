@@ -7,7 +7,9 @@ import (
 type MenuItem struct {
 	ID          primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
 	Name        string             `bson:"name,omitempty" json:"name,omitempty"`
+	Ingredients string             `bson:"ingredients,omitempty" json:"ingredients,omitempty"`
 	Description string             `bson:"description,omitempty" json:"description,omitempty"`
+	Calories    float64            `bson:"calories,omitempty" json:"calories,omitempty"`
 	Category    string             `bson:"category,omitempty" json:"category,omitempty"` 
 	Image       string             `bson:"image,omitempty" json:"image,omitempty"`
 }
@@ -26,7 +28,9 @@ type Admin struct {
 
 type ReqMenu struct {
 	Name        string             `bson:"name,omitempty" json:"name,omitempty"`
+	Ingredients string             `bson:"ingredients,omitempty" json:"ingredients,omitempty"`
 	Description string             `bson:"description,omitempty" json:"description,omitempty"`
+	Calories    float64            `bson:"calories,omitempty" json:"calories,omitempty"`
 	Category    string             `bson:"category,omitempty" json:"category,omitempty"` 
 	Image       string             `bson:"image,omitempty" json:"image,omitempty"`
 }

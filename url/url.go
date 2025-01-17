@@ -21,8 +21,8 @@ func Web(page *fiber.App) {
 	page.Get("/menu", controller.GetMenu)
 	page.Get("/menu/:id", controller.GetMenuID)
 	page.Post("/insert", controller.InsertDataMenu)
-	// page.Put("/update/:id", controller.UpdateDataMenu)
-	// page.Delete("/delete/:id", controller.DeleteMenuByID)
+	page.Put("/update/:id", controller.UpdateDataMenuItem)
+	page.Delete("/delete/:id", controller.DeleteMenuItemByID)
 
 	// page.Get("/docs/*", swagger.HandlerDefault)
 }
