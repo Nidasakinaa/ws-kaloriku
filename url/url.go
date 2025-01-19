@@ -24,5 +24,11 @@ func Web(page *fiber.App) {
 	page.Put("/update/:id", controller.UpdateDataMenuItem)
 	page.Delete("/delete/:id", controller.DeleteMenuItemByID)
 
+	page.Get("/user", controller.GetUser)
+	page.Get("/user/:id", controller.GetUserID)
+	page.Post("/insert", controller.InsertDataUser)
+	page.Put("/update/:id", controller.UpdateDataUser)
+	page.Delete("/delete/:id", controller.DeleteUserByID)
+
 	// page.Get("/docs/*", swagger.HandlerDefault)
 }

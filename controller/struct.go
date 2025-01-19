@@ -14,16 +14,13 @@ type MenuItem struct {
 	Image       string             `bson:"image,omitempty" json:"image,omitempty"`
 }
 
-type Customer struct {
-	ID        	 primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	Name      	 string             `bson:"name,omitempty" json:"name,omitempty"`
-	Phone     	 string             `bson:"phone,omitempty" json:"phone,omitempty"`
-}
-
-type Admin struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	Username string             `bson:"username,omitempty" json:"username,omitempty"`
-	Password string             `bson:"password,omitempty" json:"password,omitempty"`
+type User struct {
+    ID       primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+    FullName string             `bson:"name,omitempty" json:"name,omitempty"`
+    Phone    string             `bson:"phone,omitempty" json:"phone,omitempty"`
+    Username string             `bson:"username,omitempty" json:"username,omitempty"`
+    Password string             `bson:"password,omitempty" json:"password,omitempty"`
+    Role     string             `bson:"role,omitempty" json:"role,omitempty"` // "admin" or "customer"
 }
 
 type ReqMenu struct {
@@ -35,12 +32,10 @@ type ReqMenu struct {
 	Image       string             `bson:"image,omitempty" json:"image,omitempty"`
 }
 
-type ReqCustomer struct {
-	Name      	 string             `bson:"name,omitempty" json:"name,omitempty"`
-	Phone     	 string             `bson:"phone,omitempty" json:"phone,omitempty"`
-}
-
-type ReqAdmin struct {
-	Username string             `bson:"username,omitempty" json:"username,omitempty"`
-	Password string             `bson:"password,omitempty" json:"password,omitempty"`
+type ReqUser struct {
+    FullName string             `bson:"name,omitempty" json:"name,omitempty"`
+    Phone    string             `bson:"phone,omitempty" json:"phone,omitempty"`
+    Username string             `bson:"username,omitempty" json:"username,omitempty"`
+    Password string             `bson:"password,omitempty" json:"password,omitempty"`
+    Role     string             `bson:"role,omitempty" json:"role,omitempty"` // "admin" or "customer"
 }
