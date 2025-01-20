@@ -1,10 +1,10 @@
-
 package middleware
 
 import (
     "context"
     "os"
     "strings"
+
     "github.com/gofiber/fiber/v2"
     "github.com/golang-jwt/jwt/v4"
     "google.golang.org/api/idtoken"
@@ -28,7 +28,7 @@ func AuthMiddleware() fiber.Handler {
 
         tokenString := parts[1]
 
-        
+
         if strings.Contains(tokenString, ".") { 
             token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
                 if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -57,8 +57,15 @@ func AuthMiddleware() fiber.Handler {
                 })
             }
 
+            role, ok := claims["role"].(string)
+            if !ok || role != "admin" {
+                return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+                    "message": "Access denied: Admin role required",
+                })
+            }
+
             c.Locals("admin_id", adminID)
-        } else {
+        } else { // Proses Google OAuth token
             ctx := context.Background()
             payload, err := idtoken.Validate(ctx, tokenString, os.Getenv("GOOGLE_CLIENT_ID"))
             if err != nil {
@@ -67,7 +74,14 @@ func AuthMiddleware() fiber.Handler {
                 })
             }
 
-            googleUserID := payload.Subject 
+            googleUserID := payload.Subject
+            role, ok := payload.Claims["role"].(string)
+            if !ok || role != "admin" {
+                return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+                    "message": "Access denied: Admin role required",
+                })
+            }
+
             c.Locals("admin_id", googleUserID)
         }
 

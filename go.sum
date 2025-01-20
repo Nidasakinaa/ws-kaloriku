@@ -21,6 +21,8 @@ github.com/Nidasakinaa/be_KaloriKu v0.0.19 h1:UMOKXV/1KjrxCAx+8CalzLhPvb35P5Q7CU
 github.com/Nidasakinaa/be_KaloriKu v0.0.19/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
 github.com/Nidasakinaa/be_KaloriKu v0.0.20 h1:M3pHVTFBNGsMfer5L4DwbpQTZoxYt+afhD0w39bURJ4=
 github.com/Nidasakinaa/be_KaloriKu v0.0.20/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
+github.com/Nidasakinaa/be_KaloriKu v0.1.1 h1:xCRSfPtkNo7c4mYgRgmhqOtLl2VBa3XUcipiwikxRFU=
+github.com/Nidasakinaa/be_KaloriKu v0.1.1/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
 github.com/aiteung/atdb v0.1.7 h1:EV7vk5ld8i1wlrzf9N3FGDcvYvQz0dCnb0m2WCbRFOk=
 github.com/aiteung/atdb v0.1.7/go.mod h1:pxLum1XaWHcrspqu3n8zHKix2h5czOIiwAgIMKl3cX0=
 github.com/aiteung/atmodel v0.0.4 h1:jz0/jPfVjiNxMGaP8Rfl+14cgJZ8uu1vg3a46L/nzBo=

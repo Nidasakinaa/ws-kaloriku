@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	iniconfig "github.com/Nidasakinaa/be_KaloriKu/config"
-	"github.com/Nidasakinaa/be_KaloriKu/model"
 	inimodel "github.com/Nidasakinaa/be_KaloriKu/model"
 	cek "github.com/Nidasakinaa/be_KaloriKu/module"
 	"github.com/Nidasakinaa/ws-kaloriku/config"
@@ -22,11 +21,18 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	storedAdmin, err := cek.GetRoleByAdmin(config.Ulbimongoconn, "User", "Admin")
+	storedAdmin, err := cek.GetByUsername(config.Ulbimongoconn, "User", loginDetails.Username)
 	if err != nil {
 		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 			"status":  http.StatusUnauthorized,
 			"message": "Invalid credentials",
+		})
+	}
+
+	if storedAdmin.Role != "admin" {
+		return c.Status(http.StatusForbidden).JSON(fiber.Map{
+			"status":  http.StatusForbidden,
+			"message": "Access denied: only admins can log in",
 		})
 	}
 
@@ -37,7 +43,7 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	token, err := iniconfig.GenerateJWT(*storedAdmin, "Admin") 
+	token, err := iniconfig.GenerateJWT(*storedAdmin) 
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
@@ -92,7 +98,7 @@ func Logout(c *fiber.Ctx) error {
 }
 
 func Register(c *fiber.Ctx) error {
-    var newAdmin model.User
+    var newAdmin inimodel.User
     if err := c.BodyParser(&newAdmin); err != nil {
         return c.Status(http.StatusBadRequest).JSON(fiber.Map{
             "status":  http.StatusBadRequest,
@@ -100,8 +106,7 @@ func Register(c *fiber.Ctx) error {
         })
     }
 
-
-    // Check if the username already exists for the specified role (Admin or Customer)
+    // Cek apakah username sudah ada di database
     existingUser, err := cek.GetByUsername(config.Ulbimongoconn, "User", newAdmin.Username)
     if err != nil {
         return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
@@ -117,6 +122,7 @@ func Register(c *fiber.Ctx) error {
         })
     }
 
+    // Hash password sebelum disimpan
     hashedPassword, err := iniconfig.HashPassword(newAdmin.Password)
     if err != nil {
         return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
@@ -124,9 +130,10 @@ func Register(c *fiber.Ctx) error {
             "message": "Could not hash password",
         })
     }
+    newAdmin.Password = hashedPassword
 
-    // Save new user to the database
-    insertedID, err := cek.InsertUser(config.Ulbimongoconn, "User", newAdmin.FullName, newAdmin.Phone, newAdmin.Username, hashedPassword, newAdmin.Role)
+    // Simpan user baru ke database
+    insertedID, err := cek.InsertUser(config.Ulbimongoconn, "User", newAdmin.FullName, newAdmin.Phone, newAdmin.Username, newAdmin.Password, newAdmin.Role)
     if err != nil {
         return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
             "status":  http.StatusInternalServerError,
@@ -137,9 +144,12 @@ func Register(c *fiber.Ctx) error {
     return c.Status(http.StatusCreated).JSON(fiber.Map{
         "status":  http.StatusCreated,
         "message": "Account registered successfully",
-        "data":    insertedID,
+        "data": fiber.Map{
+            "user_id": insertedID,
+        },
     })
 }
+
 
 
 func DashboardPage(c *fiber.Ctx) error {
