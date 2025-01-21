@@ -66,6 +66,59 @@ func Login(c *fiber.Ctx) error {
 	})
 }
 
+func CustomerLogin(c *fiber.Ctx) error {
+    var loginDetails inimodel.User
+    if err := c.BodyParser(&loginDetails); err != nil {
+        return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+            "status":  http.StatusBadRequest,
+            "message": "Invalid request",
+        })
+    }
+
+    storedUser, err := cek.GetByUsername(config.Ulbimongoconn, "User", loginDetails.Username)
+    if err != nil {
+        return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+            "status":  http.StatusUnauthorized,
+            "message": "Invalid credentials",
+        })
+    }
+
+    if storedUser.Role != "customer" {
+        return c.Status(http.StatusForbidden).JSON(fiber.Map{
+            "status":  http.StatusForbidden,
+            "message": "Access denied: only customers can log in",
+        })
+    }
+
+    if !iniconfig.CheckPasswordHash(loginDetails.Password, storedUser.Password) {
+        return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+            "status":  http.StatusUnauthorized,
+            "message": "Invalid credentials",
+        })
+    }
+
+    token, err := iniconfig.GenerateJWT(*storedUser) 
+    if err != nil {
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  http.StatusInternalServerError,
+            "message": "Could not generate token",
+        })
+    }
+
+    err = cek.SaveTokenToDatabase(config.Ulbimongoconn, "tokens", storedUser.ID.Hex(), token)
+    if err != nil {
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  http.StatusInternalServerError,
+            "message": "Could not save token",
+        })
+    }
+
+    return c.Status(http.StatusOK).JSON(fiber.Map{
+        "status":  http.StatusOK,
+        "message": "Customer login successful",
+        "token":   token,
+    })
+}
 
 func Logout(c *fiber.Ctx) error {
 	authHeader := c.Get("Authorization")

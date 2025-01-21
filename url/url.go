@@ -32,6 +32,8 @@ func Web(page *fiber.App) {
 	page.Delete("/delete/:id", controller.DeleteUserByID)
 	page.Post("/registeruser", handler.Register)
 	page.Post("/login", handler.Login)
+	page.Post("/loginCust", handler.CustomerLogin)
+
 
 	// page.Get("/docs/*", swagger.HandlerDefault)
 
