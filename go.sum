@@ -13,14 +13,6 @@ github.com/Azure/azure-sdk-for-go/sdk/azcore v1.1.2/go.mod h1:uGG2W01BaETf0Ozp+Q
 github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.2.1/go.mod h1:gLa1CL2RNE4s7M3yopJ/p0iq5DdY6Yv5ZUt9MTRZOQM=
 github.com/Azure/azure-sdk-for-go/sdk/internal v1.0.0/go.mod h1:eWRD7oawr1Mu1sLCawqVc0CUiF43ia3qQMxLscsKQ9w=
 github.com/AzureAD/microsoft-authentication-library-for-go v0.8.1/go.mod h1:4qFor3D/HDsvBME35Xy9rwW9DecL+M2sNw1ybjPtwA0=
-github.com/Nidasakinaa/be_KaloriKu v0.0.17 h1:WHC6Y6Su6HYzwi++k07jGmNdyAp00tVk88FAgbMX1Z0=
-github.com/Nidasakinaa/be_KaloriKu v0.0.17/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
-github.com/Nidasakinaa/be_KaloriKu v0.0.18 h1:p75BY0B0+IpG6HReBuRTDLB9Or5R4B3JW12Ytu2juBM=
-github.com/Nidasakinaa/be_KaloriKu v0.0.18/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
-github.com/Nidasakinaa/be_KaloriKu v0.0.19 h1:UMOKXV/1KjrxCAx+8CalzLhPvb35P5Q7CUY53eJc8Vk=
-github.com/Nidasakinaa/be_KaloriKu v0.0.19/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
-github.com/Nidasakinaa/be_KaloriKu v0.0.20 h1:M3pHVTFBNGsMfer5L4DwbpQTZoxYt+afhD0w39bURJ4=
-github.com/Nidasakinaa/be_KaloriKu v0.0.20/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
 github.com/Nidasakinaa/be_KaloriKu v0.1.1 h1:xCRSfPtkNo7c4mYgRgmhqOtLl2VBa3XUcipiwikxRFU=
 github.com/Nidasakinaa/be_KaloriKu v0.1.1/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
 github.com/aiteung/atdb v0.1.7 h1:EV7vk5ld8i1wlrzf9N3FGDcvYvQz0dCnb0m2WCbRFOk=
