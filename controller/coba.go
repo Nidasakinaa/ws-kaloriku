@@ -72,7 +72,7 @@ func GetMenuID(c *fiber.Ctx) error {
 // @Produce json
 // @Success 200 {object} MenuItem
 // @Router /menu [get]
-//GetAllMenuItem retrieves all menu items from the database
+// GetAllMenuItem retrieves all menu items from the database
 func GetMenu(c *fiber.Ctx) error {
 	ps := cek.GetAllMenuItem(config.Ulbimongoconn, "Menu")
 	return c.JSON(ps)
@@ -104,7 +104,7 @@ func InsertDataMenu(c *fiber.Ctx) error {
 		menuItem.Description,
 		menuItem.Calories,
 		menuItem.Category,
-		menuItem.Image) 
+		menuItem.Image)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
@@ -212,7 +212,6 @@ func DeleteMenuItemByID(c *fiber.Ctx) error {
 		"message": fmt.Sprintf("Data with id %s deleted successfully", id),
 	})
 }
-
 
 // GetUser godoc
 // @Summary Get All Data User.
@@ -346,7 +345,7 @@ func UpdateDataUser(c *fiber.Ctx) error {
 		user.FullName,
 		user.Phone,
 		user.Username,
-		user.Password, 
+		user.Password,
 		user.Role)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
