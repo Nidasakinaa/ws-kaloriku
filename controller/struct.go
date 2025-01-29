@@ -23,7 +23,7 @@ type User struct {
     Role     string             `bson:"role,omitempty" json:"role,omitempty"` // "admin" or "customer"
 }
 
-type ReqMenu struct {
+type ReqMenuItem struct {
 	Name        string             `bson:"name,omitempty" json:"name,omitempty"`
 	Ingredients string             `bson:"ingredients,omitempty" json:"ingredients,omitempty"`
 	Description string             `bson:"description,omitempty" json:"description,omitempty"`
