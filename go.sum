@@ -15,8 +15,8 @@ github.com/Azure/azure-sdk-for-go/sdk/internal v1.0.0/go.mod h1:eWRD7oawr1Mu1sLC
 github.com/AzureAD/microsoft-authentication-library-for-go v0.8.1/go.mod h1:4qFor3D/HDsvBME35Xy9rwW9DecL+M2sNw1ybjPtwA0=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
 github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
-github.com/Nidasakinaa/be_KaloriKu v0.0.22 h1:5+Np5joV9wtUZQ4dP4Ojw2BaLW+fG9jg2EULb72x0oQ=
-github.com/Nidasakinaa/be_KaloriKu v0.0.22/go.mod h1:VrK0j51pTBdoyM+WlaJO84lQq/zb1V27jprnFIRdvhI=
+github.com/Nidasakinaa/be_KaloriKu v0.0.23 h1:BM5Jty19KlrO7uxYAcifxEP80NYOa/oAf898fcEraHw=
+github.com/Nidasakinaa/be_KaloriKu v0.0.23/go.mod h1:ZIS7PGMS84uknJ7rLvJ7D5TOCSrLQObcyhK2u0CQSUE=
 github.com/aiteung/atdb v0.1.7 h1:EV7vk5ld8i1wlrzf9N3FGDcvYvQz0dCnb0m2WCbRFOk=
 github.com/aiteung/atdb v0.1.7/go.mod h1:pxLum1XaWHcrspqu3n8zHKix2h5czOIiwAgIMKl3cX0=
 github.com/aiteung/atmodel v0.0.4 h1:jz0/jPfVjiNxMGaP8Rfl+14cgJZ8uu1vg3a46L/nzBo=
