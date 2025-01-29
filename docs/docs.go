@@ -129,7 +129,7 @@ const docTemplate = `{
                 "tags": [
                     "MenuItem"
                 ],
-                "summary": "Get By Category Data Menu.",
+                "summary": "Get Menu By Category Data Menu.",
                 "parameters": [
                     {
                         "type": "string",

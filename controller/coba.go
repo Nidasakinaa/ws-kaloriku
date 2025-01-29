@@ -65,7 +65,7 @@ func GetMenuID(c *fiber.Ctx) error {
 }
 
 // GetMenuByCategory godoc
-// @Summary Get By Category Data Menu.
+// @Summary Get Menu By Category Data Menu.
 // @Description Ambil data menu berdasarkan kategori.
 // @Tags MenuItem
 // @Accept json

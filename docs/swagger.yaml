@@ -189,7 +189,7 @@ paths:
           description: Not Found
         "500":
           description: Internal Server Error
-      summary: Get By Category Data Menu.
+      summary: Get Menu By Category Data Menu.
       tags:
       - MenuItem
   /update/{id}:
