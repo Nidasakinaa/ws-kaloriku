@@ -64,6 +64,42 @@ func GetMenuID(c *fiber.Ctx) error {
 	return c.JSON(ps)
 }
 
+// GetMenuByCategory godoc
+// @Summary Get By Category Data Menu.
+// @Description Ambil data menu berdasarkan kategori.
+// @Tags MenuItem
+// @Accept json
+// @Produce json
+// @Param category path string true "Masukan Kategori"
+// @Success 200 {array} MenuItem
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /menu/category/{category} [get]
+func GetMenuByCategory(c *fiber.Ctx) error {
+    category := c.Params("category")
+    if category == "" {
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  http.StatusInternalServerError,
+            "message": "Wrong parameter",
+        })
+    }
+    ps, err := cek.GetMenuItemByCategory(category, config.Ulbimongoconn, "Proyek3")
+    if err != nil {
+        if errors.Is(err, mongo.ErrNoDocuments) {
+            return c.Status(http.StatusNotFound).JSON(fiber.Map{
+                "status":  http.StatusNotFound,
+                "message": fmt.Sprintf("No data found for category %s", category),
+            })
+        }
+        return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+            "status":  http.StatusInternalServerError,
+            "message": fmt.Sprintf("Error retrieving data for category %s", category),
+        })
+    }
+    return c.JSON(ps)
+}
+
 // GetMenu godoc
 // @Summary Get All Data Menu.
 // @Description Mengambil semua data menu.
