@@ -65,17 +65,17 @@ func GetMenuID(c *fiber.Ctx) error {
 }
 
 // GetMenuByCategory godoc
-// @Summary Get Menu By Category Data Menu.
-// @Description Ambil data menu berdasarkan kategori.
+// @Summary Get By Category Data Menu.
+// @Description Ambil per ID data menu.
 // @Tags MenuItem
 // @Accept json
 // @Produce json
-// @Param category path string true "Masukan Kategori"
-// @Success 200 {array} MenuItem
+// @Param id path string true "Masukan category"
+// @Success 200 {object} MenuItem
 // @Failure 400
 // @Failure 404
 // @Failure 500
-// @Router /menu/category/{category} [get]
+// @Router /menu/{category} [get]
 func GetMenuByCategory(c *fiber.Ctx) error {
 	category := c.Params("category")
 	if category == "" {
@@ -154,9 +154,9 @@ func InsertDataMenu(c *fiber.Ctx) error {
 	})
 }
 
-// UpdateDataMenu godoc
-// @Summary Update data menuItem.
-// @Description Ubah data menuItem.
+// UpdateData godoc
+// @Summary Update data menu.
+// @Description Ubah data menu.
 // @Tags MenuItem
 // @Accept json
 // @Produce json

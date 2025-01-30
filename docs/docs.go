@@ -117,9 +117,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/menu/category/{category}": {
+        "/menu/{category}": {
             "get": {
-                "description": "Ambil data menu berdasarkan kategori.",
+                "description": "Ambil per ID data menu.",
                 "consumes": [
                     "application/json"
                 ],
@@ -129,12 +129,12 @@ const docTemplate = `{
                 "tags": [
                     "MenuItem"
                 ],
-                "summary": "Get Menu By Category Data Menu.",
+                "summary": "Get By Category Data Menu.",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Masukan Kategori",
-                        "name": "category",
+                        "description": "Masukan category",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -143,10 +143,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/controller.MenuItem"
-                            }
+                            "$ref": "#/definitions/controller.MenuItem"
                         }
                     },
                     "400": {
