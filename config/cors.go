@@ -18,8 +18,7 @@ var origins = []string{
 	"https://whatsauth.github.io",
 	"http://127.0.0.1:5500",
 	"http://127.0.0.1:8080",
-	"https://Nidasakinaa.github.io",
-	"https://Nidasakinaa.github.io",
+	"https://nidasakinaa.github.io",
 }
 
 var Internalhost string = os.Getenv("INTERNALHOST") + ":" + os.Getenv("PORT")
@@ -27,7 +26,7 @@ var Internalhost string = os.Getenv("INTERNALHOST") + ":" + os.Getenv("PORT")
 var Cors = cors.Config{
 	AllowOrigins:     strings.Join(origins[:], ","),
 	AllowMethods:     "GET,HEAD,OPTIONS,POST,PUT,DELETE",
-	AllowHeaders:     "Origin, Login, Content-Type",
+	AllowHeaders: 	  "Origin, Login, Content-Type, Authorization, Accept, X-Requested-With",
 	ExposeHeaders:    "Content-Length",
 	AllowCredentials: true,
 }
