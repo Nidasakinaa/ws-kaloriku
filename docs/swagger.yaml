@@ -72,7 +72,30 @@ info:
   title: TES SWAGGER KALORIKU
   version: "1.0"
 paths:
-  /delete/{id}:
+  /deleteMenu/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Hapus data menuItem.
+      parameters:
+      - description: Masukan ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Delete data menuItem.
+      tags:
+      - MenuItem
+  /deleteUser/{id}:
     delete:
       consumes:
       - application/json
@@ -95,7 +118,33 @@ paths:
       summary: Delete data user.
       tags:
       - User
-  /insert:
+  /insertMenu:
+    post:
+      consumes:
+      - application/json
+      description: Input data menu.
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/controller.ReqMenuItem'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.MenuItem'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Insert Data Menu.
+      tags:
+      - MenuItem
+  /insertUser:
     post:
       consumes:
       - application/json
@@ -163,7 +212,38 @@ paths:
       summary: Get By ID Data Menu.
       tags:
       - MenuItem
-  /update/{id}:
+  /updateMenu/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Ubah data menu.
+      parameters:
+      - description: Masukan ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/controller.ReqMenuItem'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.MenuItem'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Update data menu.
+      tags:
+      - MenuItem
+  /updateUser/{id}:
     put:
       consumes:
       - application/json
