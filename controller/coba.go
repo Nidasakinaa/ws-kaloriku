@@ -124,7 +124,7 @@ func GetMenu(c *fiber.Ctx) error {
 // @Success 200 {object} MenuItem
 // @Failure 400
 // @Failure 500
-// @Router /insert [post]
+// @Router /insertMenu [post]
 func InsertDataMenu(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
 	var menuItem inimodel.MenuItem
@@ -165,7 +165,7 @@ func InsertDataMenu(c *fiber.Ctx) error {
 // @Success 200 {object} MenuItem
 // @Failure 400
 // @Failure 500
-// @Router /update/{id} [put]
+// @Router /updateMenu/{id} [put]
 func UpdateDataMenuItem(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
 	id := c.Params("id")
@@ -217,7 +217,7 @@ func UpdateDataMenuItem(c *fiber.Ctx) error {
 // @Success 200
 // @Failure 400
 // @Failure 500
-// @Router /delete/{id} [delete]
+// @Router /deleteMenu/{id} [delete]
 func DeleteMenuItemByID(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if id == "" {
@@ -315,7 +315,7 @@ func GetUserID(c *fiber.Ctx) error {
 // @Success 200 {object} User
 // @Failure 400
 // @Failure 500
-// @Router /insert [post]
+// @Router /insertUser [post]
 func InsertDataUser(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
 	var user inimodel.User
@@ -355,7 +355,7 @@ func InsertDataUser(c *fiber.Ctx) error {
 // @Success 200 {object} User
 // @Failure 400
 // @Failure 500
-// @Router /update/{id} [put]
+// @Router /updateUser/{id} [put]
 func UpdateDataUser(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
 	id := c.Params("id")
@@ -406,7 +406,7 @@ func UpdateDataUser(c *fiber.Ctx) error {
 // @Success 200
 // @Failure 400
 // @Failure 500
-// @Router /delete/{id} [delete]
+// @Router /deleteUser/{id} [delete]
 func DeleteUserByID(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if id == "" {
