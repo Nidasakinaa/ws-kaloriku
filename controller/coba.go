@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
+	iniconfig "github.com/Nidasakinaa/be_KaloriKu/config"
 	inimodel "github.com/Nidasakinaa/be_KaloriKu/model"
 	cek "github.com/Nidasakinaa/be_KaloriKu/module"
 	"github.com/Nidasakinaa/ws-kaloriku/config"
@@ -325,6 +326,17 @@ func InsertDataUser(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
+
+	// Hash password sebelum disimpan
+	hashedPassword, err := iniconfig.HashPassword(user.Password)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": "Could not hash password",
+		})
+	}
+	user.Password = hashedPassword
+
 	insertedID, err := cek.InsertUser(db, "User",
 		user.FullName,
 		user.Phone,
