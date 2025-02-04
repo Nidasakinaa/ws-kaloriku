@@ -388,6 +388,16 @@ func UpdateDataUser(c *fiber.Ctx) error {
 		})
 	}
 
+	// Hash password sebelum disimpan
+	hashedPassword, err := iniconfig.HashPassword(user.Password)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": "Could not hash password",
+		})
+	}
+	user.Password = hashedPassword
+
 	err = cek.UpdateUser(context.Background(), db, "User",
 		objectID,
 		user.FullName,
