@@ -63,6 +63,7 @@ func Login(c *fiber.Ctx) error {
 		"status":  http.StatusOK,
 		"message": "Login successful",
 		"token":   token,
+        "role":    storedAdmin.Role,
 	})
 }
 
