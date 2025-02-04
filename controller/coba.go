@@ -13,6 +13,7 @@ import (
 	"github.com/aiteung/musik"
 	"github.com/gofiber/fiber/v2"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -258,9 +259,23 @@ func DeleteMenuItemByID(c *fiber.Ctx) error {
 // @Produce json
 // @Success 200 {object} User
 // @Router /user [get]
-func GetUser(c *fiber.Ctx) error {
-	ps := cek.GetAllUser(config.Ulbimongoconn, "User")
-	return c.JSON(ps)
+func GetAllUser(db *mongo.Database, col string) ([]inimodel.User, error) {
+    var data []inimodel.User
+    user := db.Collection(col)
+
+    cursor, err := user.Find(context.TODO(), bson.M{})
+    if err != nil {
+        fmt.Println("GetAllUser error:", err)
+        return nil, err
+    }
+    defer cursor.Close(context.TODO()) // Selalu tutup cursor
+
+    if err := cursor.All(context.TODO(), &data); err != nil {
+        fmt.Println("Error decoding users:", err)
+        return nil, err
+    }
+
+    return data, nil
 }
 
 // GetUserID godoc
