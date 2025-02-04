@@ -29,12 +29,12 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	if storedAdmin.Role != "admin" {
-		return c.Status(http.StatusForbidden).JSON(fiber.Map{
-			"status":  http.StatusForbidden,
-			"message": "Access denied: only admins can log in",
-		})
-	}
+	// if storedAdmin.Role != "admin" {
+	// 	return c.Status(http.StatusForbidden).JSON(fiber.Map{
+	// 		"status":  http.StatusForbidden,
+	// 		"message": "Access denied: only admins can log in",
+	// 	})
+	// }
 
 	if !iniconfig.CheckPasswordHash(loginDetails.Password, storedAdmin.Password) {
 		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
