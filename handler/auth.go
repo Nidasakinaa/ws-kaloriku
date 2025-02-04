@@ -83,12 +83,12 @@ func CustomerLogin(c *fiber.Ctx) error {
         })
     }
 
-    if storedUser.Role != "customer" {
-        return c.Status(http.StatusForbidden).JSON(fiber.Map{
-            "status":  http.StatusForbidden,
-            "message": "Access denied: only customers can log in",
-        })
-    }
+    // if storedUser.Role != "customer" {
+    //     return c.Status(http.StatusForbidden).JSON(fiber.Map{
+    //         "status":  http.StatusForbidden,
+    //         "message": "Access denied: only customers can log in",
+    //     })
+    // }
 
     if !iniconfig.CheckPasswordHash(loginDetails.Password, storedUser.Password) {
         return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
@@ -117,6 +117,7 @@ func CustomerLogin(c *fiber.Ctx) error {
         "status":  http.StatusOK,
         "message": "Customer login successful",
         "token":   token,
+        "role":    storedUser.Role,
     })
 }
 
