@@ -25,7 +25,7 @@ func Web(page *fiber.App) {
 	page.Put("/updateMenu/:id", controller.UpdateDataMenuItem)
 	page.Delete("/deleteMenu/:id", controller.DeleteMenuItemByID)
 
-	page.Get("/user", controller.GetUser)
+	page.Get("/user", controller.GetAllUser)
 	page.Get("/user/:id", controller.GetUserID)
 	page.Post("/insertUser", controller.InsertDataUser)
 	page.Put("/user/updateUser/:id", controller.UpdateDataUser)

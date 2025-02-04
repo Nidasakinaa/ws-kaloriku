@@ -7,13 +7,13 @@ import (
 	"net/http"
 
 	iniconfig "github.com/Nidasakinaa/be_KaloriKu/config"
-	inimodel "github.com/Nidasakinaa/be_KaloriKu/model"
+	model "github.com/Nidasakinaa/be_KaloriKu/model"
 	cek "github.com/Nidasakinaa/be_KaloriKu/module"
 	"github.com/Nidasakinaa/ws-kaloriku/config"
 	"github.com/aiteung/musik"
 	"github.com/gofiber/fiber/v2"
 
-	"go.mongodb.org/mongo-driver/bson"
+	// "go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -129,7 +129,7 @@ func GetMenu(c *fiber.Ctx) error {
 // @Router /insertMenu [post]
 func InsertDataMenu(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
-	var menuItem inimodel.MenuItem
+	var menuItem model.MenuItem
 	if err := c.BodyParser(&menuItem); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
@@ -180,7 +180,7 @@ func UpdateDataMenuItem(c *fiber.Ctx) error {
 		})
 	}
 
-	var menuItem inimodel.MenuItem
+	var menuItem model.MenuItem
 	if err := c.BodyParser(&menuItem); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
@@ -259,23 +259,15 @@ func DeleteMenuItemByID(c *fiber.Ctx) error {
 // @Produce json
 // @Success 200 {object} User
 // @Router /user [get]
-func GetAllUser(db *mongo.Database, col string) ([]inimodel.User, error) {
-    var data []inimodel.User
-    user := db.Collection(col)
-
-    cursor, err := user.Find(context.TODO(), bson.M{})
-    if err != nil {
-        fmt.Println("GetAllUser error:", err)
-        return nil, err
-    }
-    defer cursor.Close(context.TODO()) // Selalu tutup cursor
-
-    if err := cursor.All(context.TODO(), &data); err != nil {
-        fmt.Println("Error decoding users:", err)
-        return nil, err
-    }
-
-    return data, nil
+func GetAllUser(c *fiber.Ctx) error {
+	ps, err := cek.GetAllUser(config.Ulbimongoconn, "User")
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.JSON(ps)
 }
 
 // GetUserID godoc
@@ -334,7 +326,7 @@ func GetUserID(c *fiber.Ctx) error {
 // @Router /insertUser [post]
 func InsertDataUser(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
-	var user inimodel.User
+	var user model.User
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
@@ -395,7 +387,7 @@ func UpdateDataUser(c *fiber.Ctx) error {
 		})
 	}
 
-	var user inimodel.User
+	var user model.User
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
