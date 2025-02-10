@@ -203,6 +203,7 @@ func Register(c *fiber.Ctx) error {
         "message": "Account registered successfully",
         "data": fiber.Map{
             "user_id": insertedID,
+            "personalized_categories": newAdmin.PersonalizedCategories,
         },
     })
 }
