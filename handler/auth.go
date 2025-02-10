@@ -189,7 +189,7 @@ func Register(c *fiber.Ctx) error {
     newAdmin.Password = hashedPassword
 
     // Simpan user baru ke database
-    insertedID, err := cek.InsertUser(config.Ulbimongoconn, "User", newAdmin.FullName, newAdmin.Phone, newAdmin.Username, newAdmin.Password, newAdmin.Role)
+    insertedID, err := cek.InsertUser(config.Ulbimongoconn, "User", newAdmin.FullName, newAdmin.Phone, newAdmin.Username, newAdmin.Password, newAdmin.Role, newAdmin.PersonalizedCategories)
     if err != nil {
         return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
             "status":  http.StatusInternalServerError,

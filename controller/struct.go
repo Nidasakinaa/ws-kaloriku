@@ -21,6 +21,7 @@ type User struct {
     Username string             `bson:"username,omitempty" json:"username,omitempty"`
     Password string             `bson:"password,omitempty" json:"password,omitempty"`
     Role     string             `bson:"role,omitempty" json:"role,omitempty"` // "admin" or "customer"
+	PersonalizedCategories []string `bson:"personalizedCategories,omitempty" json:"personalizedCategories,omitempty"`
 }
 
 type ReqMenuItem struct {

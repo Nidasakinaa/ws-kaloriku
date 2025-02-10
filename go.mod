@@ -3,7 +3,7 @@ module github.com/Nidasakinaa/ws-kaloriku
 go 1.23.3
 
 require (
-	github.com/Nidasakinaa/be_KaloriKu v0.0.32
+	github.com/Nidasakinaa/be_KaloriKu v0.1.5
 	github.com/aiteung/atdb v0.1.7
 	github.com/aiteung/musik v0.0.5
 	github.com/gofiber/fiber/v2 v2.52.6

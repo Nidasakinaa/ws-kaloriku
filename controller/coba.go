@@ -327,9 +327,11 @@ func GetUserID(c *fiber.Ctx) error {
 func InsertDataUser(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn
 	var user model.User
+
+	// Parsing body request ke struct User
 	if err := c.BodyParser(&user); err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"status":  http.StatusInternalServerError,
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  http.StatusBadRequest,
 			"message": err.Error(),
 		})
 	}
@@ -344,18 +346,28 @@ func InsertDataUser(c *fiber.Ctx) error {
 	}
 	user.Password = hashedPassword
 
+	// Pastikan PersonalizedCategories tidak nil
+	if user.PersonalizedCategories == nil {
+		user.PersonalizedCategories = []string{}
+	}
+
+	// Insert ke database
 	insertedID, err := cek.InsertUser(db, "User",
 		user.FullName,
 		user.Phone,
 		user.Username,
 		user.Password,
-		user.Role)
+		user.Role,
+		user.PersonalizedCategories, // Tidak perlu [] di sini
+	)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
 			"message": err.Error(),
 		})
 	}
+
+	// Response sukses
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":      http.StatusOK,
 		"message":     "Data berhasil disimpan.",
