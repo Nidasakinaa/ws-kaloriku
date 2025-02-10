@@ -153,6 +153,7 @@ func Logout(c *fiber.Ctx) error {
 }
 
 //Register Function
+
 func Register(c *fiber.Ctx) error {
     var newAdmin inimodel.User
     if err := c.BodyParser(&newAdmin); err != nil {
