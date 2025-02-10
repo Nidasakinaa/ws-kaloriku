@@ -18,6 +18,7 @@ var origins = []string{
 	"https://whatsauth.github.io",
 	"http://127.0.0.1:5500",
 	"http://127.0.0.1:8080",
+	"https://nidasakinaa.github.io/KaloriKu-FE/pages/",
 	"https://nidasakinaa.github.io",
 }
 
