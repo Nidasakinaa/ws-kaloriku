@@ -35,6 +35,7 @@ func Login(c *fiber.Ctx) error {
 	// 		"message": "Access denied: only admins can log in",
 	// 	})
 	// }
+    fmt.Printf("storedAdmin: %v\n", storedAdmin)
 
 	if !iniconfig.CheckPasswordHash(loginDetails.Password, storedAdmin.Password) {
 		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
@@ -64,6 +65,7 @@ func Login(c *fiber.Ctx) error {
 		"message": "Login successful",
 		"token":   token,
         "role":    storedAdmin.Role,
+        "personalized_categories": storedAdmin.PersonalizedCategories,
 	})
 }
 
